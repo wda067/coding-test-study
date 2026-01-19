@@ -2,19 +2,22 @@
 ## 📅 2026년 1월 3주차 문제
 
 ### 📌 월요일  
-<!-- - [[BOJ] 7576번 토마토](https://www.acmicpc.net/problem/7576) -->
+- [[PRO] 92343번 양과 늑대](https://school.programmers.co.kr/learn/courses/30/lessons/92343)
 
 ### 📌 화요일  
-<!-- - [[BOJ] 9663번 N-Queen](https://www.acmicpc.net/problem/9663) -->
+- [[BOJ] 2179번 비슷한 단어](https://www.acmicpc.net/problem/2179)
 
 ### 📌 수요일  
-<!-- - [[BOJ] 15683번 감시](https://www.acmicpc.net/problem/15683)  -->
+- [[PRO] 150370번 개인정보 수집 유효기간](https://school.programmers.co.kr/learn/courses/30/lessons/150370)
 
 ### 📌 목요일  
-<!-- - [[BOJ] 15486번 퇴사 2](https://www.acmicpc.net/problem/15486)  -->
+- [[BOJ] 11559번 Puyo Puyo](https://www.acmicpc.net/problem/11559)
 
 ### 📌 금요일  
-<!-- - [[BOJ] 1931번 회의실 배정](https://www.acmicpc.net/problem/1931)  -->
+- [[BOJ] 2138번 전구와 스위치](https://www.acmicpc.net/problem/2138)
+
+### 📌 토요일  
+- [[BOJ] 20437번 문자열 게임 2](https://www.acmicpc.net/problem/20437)
 
 ## ✅ 스터디 진행 방법
 1. 현재 저장소를 자신의 깃허브 계정으로 **포크**한다.
