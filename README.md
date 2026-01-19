@@ -20,7 +20,7 @@
 1. 현재 저장소를 자신의 깃허브 계정으로 **포크**한다.
 2. 포크한 저장소를 로컬 환경에 **클론**한다.
 ```
-git clone https://github.com/{github_id}/algorithm-study.git
+git clone https://github.com/{github_id}/coding-test-study.git
 ```
 3. 자신의 깃허브 ID로 **브랜치를 생성**한다.
 ```
