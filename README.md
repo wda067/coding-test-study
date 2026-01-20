@@ -2,13 +2,13 @@
 ## 📅 2026년 1월 3주차 문제
 
 ### 📌 월요일  
-- [[PRO] 92343번 양과 늑대](https://school.programmers.co.kr/learn/courses/30/lessons/92343)
+- [[PGS] 92343번 양과 늑대](https://school.programmers.co.kr/learn/courses/30/lessons/92343)
 
 ### 📌 화요일  
 - [[BOJ] 2179번 비슷한 단어](https://www.acmicpc.net/problem/2179)
 
 ### 📌 수요일  
-- [[PRO] 150370번 개인정보 수집 유효기간](https://school.programmers.co.kr/learn/courses/30/lessons/150370)
+- [[PGS] 150370번 개인정보 수집 유효기간](https://school.programmers.co.kr/learn/courses/30/lessons/150370)
 
 ### 📌 목요일  
 - [[BOJ] 11559번 Puyo Puyo](https://www.acmicpc.net/problem/11559)
