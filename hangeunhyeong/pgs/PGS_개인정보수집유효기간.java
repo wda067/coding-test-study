@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class PGS_개인정보수집유효기간 {
     public int[] solution(String today, String[] terms, String[] privacies) {
         int n = privacies.length;
-        // 약관종류에 따라 유효기간 구하기
+        // 약관종류에 따른 유효기간 분류(idx : 알파벳 순서 (A는 0 B는 1...), val : 유효기간 개월수)
         int[] alphabet = new int[26];
         for(String str : terms){
             String[] t = str.split(" ");
@@ -17,16 +17,18 @@ public class PGS_개인정보수집유효기간 {
         int[][] date = new int[n][3];
         String[][] info = new String[n][2];
         ArrayList<Integer> arr = new ArrayList<>();
-
+        // privacies에서 날짜와 약관종류 분리
         for(int i = 0; i < n; i++){
             info[i] = privacies[i].split(" ");
+            // 날짜 : 문자열->int
             for(int j = 0; j < 3; j++){
                 date[i][j] = Integer.parseInt(info[i][0].split("\\.")[j]);
             }
+            // 약관종류에 따른 유효기간 구하기
             int duration = alphabet[info[i][1].charAt(0) - 'A'];
+            // 만료일 구하기 (날짜 + 유효기간 = 만료일)
             // yyyy
             expire[i][0] = date[i][0];
-
             //mm
             expire[i][1] = date[i][1] + duration;
             expire[i][0] += expire[i][1] % 12 == 0 ? expire[i][1] / 12 - 1 : expire[i][1] / 12;
@@ -34,6 +36,7 @@ public class PGS_개인정보수집유효기간 {
             //dd
             expire[i][2] = date[i][2];
             System.out.printf("만료일 : %d/%d/%d\n", expire[i][0], expire[i][1], expire[i][2]);
+
             if(isExpired(today, expire[i]))
                 arr.add(i + 1);
         }
