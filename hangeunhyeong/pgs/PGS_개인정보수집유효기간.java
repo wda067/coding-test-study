@@ -13,31 +13,25 @@ public class PGS_개인정보수집유효기간 {
             alphabet[ch - 'A'] = Integer.parseInt(t[1]);
         }
 
-        int[][] expire = new int[n][3];
-        int[][] date = new int[n][3];
-        String[][] info = new String[n][2];
         ArrayList<Integer> arr = new ArrayList<>();
         // privacies에서 날짜와 약관종류 분리
         for(int i = 0; i < n; i++){
-            info[i] = privacies[i].split(" ");
-            // 날짜 : 문자열->int
-            for(int j = 0; j < 3; j++){
-                date[i][j] = Integer.parseInt(info[i][0].split("\\.")[j]);
-            }
-            // 약관종류에 따른 유효기간 구하기
-            int duration = alphabet[info[i][1].charAt(0) - 'A'];
-            // 만료일 구하기 (날짜 + 유효기간 = 만료일)
-            // yyyy
-            expire[i][0] = date[i][0];
-            //mm
-            expire[i][1] = date[i][1] + duration;
-            expire[i][0] += expire[i][1] % 12 == 0 ? expire[i][1] / 12 - 1 : expire[i][1] / 12;
-            expire[i][1] = expire[i][1] % 12 == 0 ? 12 : expire[i][1] % 12;
-            //dd
-            expire[i][2] = date[i][2];
-            System.out.printf("만료일 : %d/%d/%d\n", expire[i][0], expire[i][1], expire[i][2]);
+            int last = privacies[i].length() - 1;
+            int idx = privacies[i].charAt(last) - 'A';
+            String[] date = privacies[i].split(" ")[0].split("\\.");
 
-            if(isExpired(today, expire[i]))
+            // 날짜 : 문자열->int
+            int y = Integer.parseInt(date[0]);
+            int m = Integer.parseInt(date[1]);
+            int d = Integer.parseInt(date[2]);
+
+            // 약관종류에 따른 유효기간 구하기
+            int duration = alphabet[idx] * 28;
+            // 만료일 구하기 (날짜 + 유효기간 = 만료일)
+            int total = y * 12 * 28 + m * 28 + d;
+            int expire = total + duration;
+
+            if(isExpired(today, expire))
                 arr.add(i + 1);
         }
 
@@ -47,19 +41,13 @@ public class PGS_개인정보수집유효기간 {
         }
         return answer;
     }
-    public boolean isExpired(String today, int[] expired){
-        // expired를 문자열로 바꾸기
-        String zero1 = "", zero2 = "";
-        if(expired[1] < 10)
-            zero1 = "0";
-        if(expired[2] < 10)
-            zero2 = "0";
-        String expiredStr = expired[0] + "." + zero1 + expired[1] + "." + zero2 + expired[2];
-
-        if(expiredStr.compareTo(today) <= 0){
-            return true;
-        }
-        return false;
+    public boolean isExpired(String today, int expired){
+        String[] todayDate = today.split("\\.");
+        int y = Integer.parseInt(todayDate[0]);
+        int m = Integer.parseInt(todayDate[1]);
+        int d = Integer.parseInt(todayDate[2]);
+        int t = y * 12 * 28 + m * 28 + d;
+        return t >= expired;
     }
     public static void main(String[] args){
         PGS_개인정보수집유효기간 sol = new PGS_개인정보수집유효기간();
