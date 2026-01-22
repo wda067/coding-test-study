@@ -13,7 +13,7 @@
 */
 import java.util.*;
 
-class 개인정보_수집_유효기간 {
+class PSG_150370 {
 	static HashMap<String, Integer> termMap = new HashMap<>();
 	static int bnd;
 	public int[] solution(String today, String[] terms, String[] privacies) {
