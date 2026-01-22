@@ -2,7 +2,7 @@ package hangeunhyeong.pgs;
 
 import java.util.ArrayList;
 
-public class PGS_개인정보수집유효기간 {
+public class PGS_150370 {
     public int[] solution(String today, String[] terms, String[] privacies) {
         int n = privacies.length;
         // 약관종류에 따른 유효기간 분류(idx : 알파벳 순서 (A는 0 B는 1...), val : 유효기간 개월수)
@@ -50,7 +50,7 @@ public class PGS_개인정보수집유효기간 {
         return t >= expired;
     }
     public static void main(String[] args){
-        PGS_개인정보수집유효기간 sol = new PGS_개인정보수집유효기간();
+        PGS_150370 sol = new PGS_150370();
         String today = "2022.05.19";
         String[] terms = {"A 6", "B 12", "C 3"};
         String[] privacies = {"2021.05.02 A", "2021.07.01 B", "2022.02.19 C", "2022.02.20 C"};
