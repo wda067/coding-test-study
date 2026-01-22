@@ -32,7 +32,7 @@ public class BOJ_11559 {
             for (int i = 0; i < 12; i++) {
                 for (int j = 0; j < 6; j++) {
                     if (map[i][j] != '.') {  // 빈칸이 아닌 경우
-                        dfs(i, j);  // 터트림
+                        bfs(i, j);  // 터트림
                     }
                 }
             }
@@ -47,7 +47,7 @@ public class BOJ_11559 {
         System.out.println(count);
     }
 
-    private static void dfs(int r, int c) {
+    private static void bfs(int r, int c) {
         Queue<int[]> q = new LinkedList<>();
         boolean[][] visited = new boolean[12][6];
         q.add(new int[]{r, c});
