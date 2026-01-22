@@ -15,11 +15,12 @@ public class BOJ_2179{
             list.add(str);
             hashMap.put(str, i);
         }
-        Collections.sort(sorted);
+        Collections.sort(sorted);   // O(Nlog N)
 
         int max = -1, cnt = 0;
         String S = "", T = "";
         TreeSet<Integer> treeSet = new TreeSet<>();
+        // O(N * 100)
         for(int i = 0; i < sorted.size() - 1; i++){
             String str1 = sorted.get(i);
             String str2 = sorted.get(i + 1);
