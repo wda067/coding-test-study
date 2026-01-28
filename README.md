@@ -1,23 +1,23 @@
 # 💻 코딩 테스트 스터디
-## 📅 2026년 1월 3주차 문제
+## 📅 2026년 1월 4주차 문제
 
 ### 📌 월요일  
-- [[PRO] 92343번 양과 늑대](https://school.programmers.co.kr/learn/courses/30/lessons/92343)
+- [[BOJ] 24337번 가희와 탑](https://www.acmicpc.net/problem/24337)
 
 ### 📌 화요일  
-- [[BOJ] 2179번 비슷한 단어](https://www.acmicpc.net/problem/2179)
+- [[PGS] 92344번 파괴되지 않은 건물](https://school.programmers.co.kr/learn/courses/30/lessons/92344)
 
 ### 📌 수요일  
-- [[PRO] 150370번 개인정보 수집 유효기간](https://school.programmers.co.kr/learn/courses/30/lessons/150370)
+- [[BOJ] 9935번 문자열 폭발](https://www.acmicpc.net/problem/9935)
 
 ### 📌 목요일  
-- [[BOJ] 11559번 Puyo Puyo](https://www.acmicpc.net/problem/11559)
+- [[BOJ] 2250번 트리의 높이와 너비](https://www.acmicpc.net/problem/2250)
 
 ### 📌 금요일  
-- [[BOJ] 2138번 전구와 스위치](https://www.acmicpc.net/problem/2138)
+- [[PGS] 60059번 자물쇠와 열쇠](https://school.programmers.co.kr/learn/courses/30/lessons/60059)
 
 ### 📌 토요일  
-- [[BOJ] 20437번 문자열 게임 2](https://www.acmicpc.net/problem/20437)
+- [[BOJ] 20056번 마법사 상어와 파이어볼](https://www.acmicpc.net/problem/20056)
 
 ## ✅ 스터디 진행 방법
 1. 현재 저장소를 자신의 깃허브 계정으로 **포크**한다.
