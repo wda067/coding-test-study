@@ -37,7 +37,7 @@ public class BOJ_24337 {
 		int a = sc.nextInt();
 		int b = sc.nextInt();
 
-		ArrayList<Integer> list = new ArrayList<>();
+		LinkedList<Integer> list = new LinkedList<>();
 
 		if(n < a + b - 1) System.out.println(-1);
 		else {
@@ -59,8 +59,11 @@ public class BOJ_24337 {
 				}
 			}
 		}
-		for(int i = 0; i < list.size(); i++){
-			System.out.print(list.get(i) + " ");
+		var sb = new StringBuilder();
+
+		for(int num : list){
+			sb.append(num).append(" ");
 		}
+		System.out.println(sb);
 	}
 }
