@@ -32,6 +32,18 @@ import java.lang.*;
 
 1. Group class, Block class
     - Group은 bndBlock저장, bndNum 저장
+2. buildGroup 메서드
+	- build 메서드로 그룹 만들기
+3. remove 메서드
+	- selectedGroup 제거
+4. gravity 메서드
+	- 배열 방식
+5. rotate 메서드
+
+[느낀점]
+- 완전 하드한 구현 문제라고 느껴졌다...
+- 클래스 설계는 그래도 무난하게 했던 것 같다
+- gravity방식을 잘 익히기
 */
 public class BOJ_21609 {
 
@@ -114,40 +126,37 @@ public class BOJ_21609 {
 	}
 
 	static Group build(int x, int y, int num){
-		PriorityQueue<Block> tmp = new PriorityQueue<>((o1, o2)->{
-			int comp1 = o1.x - o2.x;
-			if(comp1 == 0) return o1.y - o2.y;
-			return comp1;
-		});
 		Queue<int[]> q = new LinkedList<>();
-		boolean[][] visited = new boolean[n][n];
 		q.add(new int[]{x,y});
-		tmp.add(new Block(x, y, num));
-		int rainbowCnt = 0;
+
+		boolean[][] visited = new boolean[n][n];
 		visited[x][y] = true;
+
+		ArrayList<Block> blocks = new ArrayList<>();
+		Block bndBlock = new Block(x,y,num);
+		int rainbowCnt = 0;
+
 		while(!q.isEmpty()){
 			int[] cur = q.poll();
 			int cx = cur[0]; int cy = cur[1];
+
+			blocks.add(new Block(cx, cy, map[cx][cy]));
+			if(map[cx][cy] == 0) rainbowCnt++;
+
+			if(map[cx][cy] > 0){
+				if(cx < bndBlock.x || (cx == bndBlock.x && cy < bndBlock.y)){
+					bndBlock = new Block(cx, cy, map[cx][cy]);
+				}
+			}
 			for(int d = 0; d < 4; d++){
-				int nx = cx + dx[d];
-				int ny = cy + dy[d];
+				int nx = cx + dx[d]; int ny = cy + dy[d];
 				if(nx < 0 || ny < 0 || nx >= n || ny >= n) continue;
 				if(visited[nx][ny]) continue;
 				if(map[nx][ny] != num && map[nx][ny] != 0) continue;
+
 				visited[nx][ny] = true;
 				q.add(new int[]{nx, ny});
-				tmp.add(new Block(nx, ny, map[nx][ny]));
-				if(map[nx][ny] == 0) rainbowCnt+=1;
 			}
-		}
-		// pq -> arraylist
-		Block bndBlock = null;
-		ArrayList<Block> blocks = new ArrayList<>();
-		int len = tmp.size();
-		for(int i = 0; i < len; i++){
-			Block cur = tmp.poll();
-			if(cur.num != 0 && bndBlock == null) bndBlock = cur;
-			blocks.add(cur);
 		}
 		if(blocks.size() < 2) return null;
 		return new Group(bndBlock, blocks, num, rainbowCnt);
