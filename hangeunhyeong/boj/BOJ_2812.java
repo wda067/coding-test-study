@@ -99,6 +99,7 @@ public class BOJ_2812 {
 //                list.print();
                 cnt++;
                 cntPerTurn++;
+                // 뒤로가서 다시 확인
                 node = node.prev;
             }
             else
