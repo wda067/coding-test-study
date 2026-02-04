@@ -92,7 +92,7 @@ public class BOJ_21609 {
                     dfs(grid[i][j], null, grid[i][j].color);
                     //블록그룹이 생성되었고 무지개인 블럭은 방문 여부 초기화
                     if(blockGroups.size() > before){
-                        for(Block block : blockGroups.getLast().blocks){
+                        for(Block block : blockGroups.get(blockGroups.size() - 1).blocks){
                             if(block.color == 0)
                                 block.visited = false;
                         }
