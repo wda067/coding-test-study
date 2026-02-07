@@ -1,6 +1,5 @@
 import java.util.*;
 import java.lang.*;
-import java.io.*;
 
 /*
 [input]
@@ -20,6 +19,9 @@ k : 이동 횟수
         - 질량 0 -> 소멸
 
 - ArrayList로 FireBall들을 기록할까하는데
+[문제점]
+- move() 후에 매 턴마다 NxN 전체를 훑음
+- divide()가 전체 balls를 매번 스캔
 
 */
 public class BOJ_20056 {
@@ -43,110 +45,85 @@ public class BOJ_20056 {
 	static int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
 	static ArrayList<FireBall> balls = new ArrayList<>();
 	static int n;
-	static int[][] map;
+	static ArrayList<FireBall>[][] map;
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		n = sc.nextInt();
 		int M = sc.nextInt();
 		int k = sc.nextInt();
-		map = new int[n+1][n+1];
+		map = new ArrayList[n][n];
+		for(int i = 0; i < n; i++) for(int j = 0; j < n; j++) map[i][j] = new ArrayList<>();
 		for(int i = 0; i < M; i++){
-			int r = sc.nextInt();
-			int c = sc.nextInt();
+			int r = sc.nextInt()-1;
+			int c = sc.nextInt()-1;
 			int m = sc.nextInt();
 			int s = sc.nextInt();
 			int d = sc.nextInt();
 
 			balls.add(new FireBall(r, c, m, s, d));
-			map[r][c] += 1;
 		}
-		for(int i = 0; i < k; i++){
-			move();
-			for(int r = 1; r <= n; r++){
-				for(int c = 1; c <= n; c++){
-					if(map[r][c] >= 2){
-						divide(r,c);
-					}
-				}
-			}
+
+		for(int t = 0; t < k; t++){
+			moveAll();
+			mergeSplitAll();
 		}
-		int res = 0;
-		for(var cur : balls){
-			res += cur.m;
-		}
-		System.out.println(res);
+
+		long ans = 0;
+		for(FireBall b : balls) ans += b.m;
+		System.out.println(ans);
 	}
 
-	static void divide(int x, int y){
-		ArrayList<FireBall> tmp = new ArrayList<>();
+	static void mergeSplitAll(){
 		ArrayList<FireBall> next = new ArrayList<>();
-		for(var ball : balls){
-			if(ball.r == x && ball.c == y){
-				tmp.add(ball);
-			} else {
-				next.add(ball);
-			}
-		}
-		int sumM = 0; int sumS = 0;
-		int size = tmp.size();
-		Boolean isOdd = null;
-		boolean res = true;
-		for(var t : tmp){
-			sumM += t.m;
-			sumS += t.s;
-			if(isOdd == null){
-				if(t.d % 2 == 0){
-					isOdd = false;
-				} else {
-					isOdd = true;
+
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
+				ArrayList<FireBall> cell = map[i][j];
+
+				int cnt = cell.size();
+				if(cnt == 0) continue;
+
+				if(cnt == 1){
+					next.add(cell.get(0));
+					continue;
 				}
-			} else {
-				if(isOdd){
-					if(t.d % 2 == 0){
-						res = false;
-					}
-				} else {
-					if(t.d % 2 != 0){
-						res = false;
-					}
+
+				int sumM = 0, sumS = 0;
+				boolean allEven = true, allOdd = true;
+
+				for(FireBall b: cell){
+					sumM += b.m;
+					sumS += b.s;
+					if(b.d % 2 == 0) allOdd = false;
+					else allEven = false;
+				}
+
+				int nm = sumM / 5;
+				if(nm == 0) continue;
+
+				int ns = sumS / cnt;
+				int startDir = (allEven || allOdd) ? 0 : 1;
+
+				for(int d = startDir; d < 8; d += 2){
+					next.add(new FireBall(i, j, nm, ns, d));
 				}
 			}
 		}
-		sumM /= 5;
-		if(sumM == 0){
-			map[x][y] = 0;
-			balls = next;
-			return;
-		}
-		sumS /= size;
-		if(res){
-			for(int d = 0; d < 8; d+=2){
-				next.add(new FireBall(x, y, sumM, sumS, d));
-			}
-		} else {
-			for(int d = 1; d < 9; d+=2){
-				next.add(new FireBall(x, y, sumM, sumS, d));
-			}
-		}
-		map[x][y] = 4;
 		balls = next;
 	}
 
-	static void move(){
-		ArrayList<FireBall> next = new ArrayList<>(balls.size());
-		for(var ball : balls){
-			int nx = ball.r + (ball.s * dx[ball.d]);
-			int ny = ball.c + (ball.s * dy[ball.d]);
-			if(nx < 1 || nx > n){
-				nx = ((nx - 1) % n + n) % n + 1;
-			}
-			if(ny < 1 || ny > n){
-				ny = ((ny - 1) % n + n) % n + 1;
-			}
-			next.add(new FireBall(nx, ny, ball.m, ball.s, ball.d));
-			map[ball.r][ball.c] -= 1;
-			map[nx][ny] += 1;
+	static void moveAll(){
+		for(int i = 0; i < n; i++) for(int j = 0; j < n; j++) map[i][j].clear();
+
+		for(FireBall b : balls){
+			int step = b.s % n;
+			int nr = (b.r + dx[b.d] * step) % n;
+			int nc = (b.c + dy[b.d] * step) % n;
+			if(nr < 0) nr += n;
+			if(nc < 0) nc += n;
+
+			b.r = nr; b.c = nc;
+			map[nr][nc].add(b);
 		}
-		balls = next;
 	}
 }
