@@ -8,7 +8,7 @@ PGS 12913 - 땅따먹기
 [문제풀이]
 - 0번째 행은 그대로 가져온다
 - 해당 땅을 밟았을 때의 최댓값 = 바로 윗행에서의 최댓값 + 땅을 밟았을 때 획득하는 점수
-- 단, 바로 아래칸은 밟지 못하므로
+- 단, 바로 아래칸은 밟지 못하므로 해당 땅을 밟았을 떄의 최댓값 = 바로 윗행에서의 두번째로 큰 점수 + 땅을 밟았을 때 획득하는 점수
  */
 public class PGS_12913 {
     int solution(int[][] land) {
@@ -24,11 +24,13 @@ public class PGS_12913 {
             second = 0;
             // 행마다 최댓값과 두번째로 큰 값 구하기
             for(int j = 0; j < 4; j++){
+                // 현재위치가 최댓값일 때
                 if(max < dp[i][j]){
-                    second = max;
+                    second = max;   // second값 갱신
                     max = dp[i][j];
                     maxIdx = j;
                 }
+                // 현재위치가 최댓값은 아니지만 second보다 클 때
                 else if(second < dp[i][j]){
                     second = dp[i][j];
                 }
