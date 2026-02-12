@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
@@ -16,7 +15,6 @@ public class BOJ_15684 {
     private static int limit;
 
     public static void main(String[] args) throws IOException {
-        System.setIn(new FileInputStream("wda067/io/input.txt"));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
