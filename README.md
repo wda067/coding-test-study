@@ -1,23 +1,23 @@
 # 💻 코딩 테스트 스터디
-## 📅 2026년 2월 2주차 문제
+## 📅 2026년 2월 4주차 문제
 
 ### 📌 월요일  
-- [[PGS] 12913번 땅따먹기](https://school.programmers.co.kr/learn/courses/30/lessons/12913)
+- [[BOJ] 20955번 민서의 응급 수술](https://www.acmicpc.net/problem/20955)
 
 ### 📌 화요일  
-- [[PGS] 118669번 등산코스 정하기](https://school.programmers.co.kr/learn/courses/30/lessons/118669)
+- [[BOJ] 2230번 수 고르기](https://www.acmicpc.net/problem/2230)
 
 ### 📌 수요일  
-- [[PGS] 42897번 도둑질](https://school.programmers.co.kr/learn/courses/30/lessons/42897)
+- [[PGS] 150369번 택배 배달과 수거하기](https://school.programmers.co.kr/learn/courses/30/lessons/150369)
 
 ### 📌 목요일  
-- [[BOJ] 15684번 사다리 조작](https://www.acmicpc.net/problem/15684)
+- [[BOJ] 21277번 짠돌이 호석](https://www.acmicpc.net/problem/21277)
 
 ### 📌 금요일  
-- [[PGS] 389481번 봉인된 주문](https://school.programmers.co.kr/learn/courses/30/lessons/389481)
+- [[BOJ] 20057번 마법사 상어와 토네이도](https://www.acmicpc.net/problem/20057)
 
 ### 📌 토요일  
-- [[BOJ] 17140번 이차원 배열과 연산](https://www.acmicpc.net/problem/17140)
+- [[BOJ] 2632번 피자판매](https://www.acmicpc.net/problem/2632)
 
 ## ✅ 스터디 진행 방법
 1. 현재 저장소를 자신의 깃허브 계정으로 **포크**한다.
