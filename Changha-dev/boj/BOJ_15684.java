@@ -17,7 +17,7 @@ i->i 가 나오도록, 가로선 개수 추가 최솟값 구해야한다.
 
 어렵군.. check()메서드 구현을 정확히 어떻게 해야될지 안떠올랐다. (좌우비교는 알겠는데 현재 값 저장해놓고 갱신하는 부분)
 */
-class Main {
+class BOJ_15684 {
 
 	static boolean[][] isCheck;
 	static int answer = Integer.MAX_VALUE;
