@@ -37,47 +37,65 @@ public class PGS_150369 {
             }
 
             int destination = Math.max(dIndex + 1, pIndex + 1);
-            minDistanceSum += destination * 2; // 이번 운행의 최종 목적지의 두배를 누적합함.(왕복이니까)
+            minDistanceSum += destination * 2L; // 이번 운행의 최종 목적지의 두배를 누적합 함.(왕복이니까)
 
             int remainDelCount = cap;
             int remainPickCount = cap;
 
             // 배달개수가 0이될 때 까지, 첫번째 집까지
-            while (remainDelCount > 0 && dIndex >= 0) {
-                // 이집에 배달해야할 개수가 remainDelCount보다 많으면 이집에서 remainDelCount 싹 소모하면 됨
-                if (deliveries[dIndex] > remainDelCount) { // 그래도 남았으니 이집은 나중애 한번 더와야함. 인덱스 놔둠
-                    deliveries[dIndex] = deliveries[dIndex] - remainDelCount;
-                    remainDelCount = 0;
-                } else if (deliveries[dIndex] == remainDelCount) { // 인덱스 하나 -- (다음 왕복시 이집부터 조사하도록)
-                    deliveries[dIndex] = deliveries[dIndex] - remainDelCount;
-                    remainDelCount = 0;
-                    dIndex--;
-                } else { // 이집에 배달 다하고도 배달물량이 남았으면
-                    remainDelCount -= deliveries[dIndex];
-                    deliveries[dIndex] = 0;
-                    dIndex--;
-                }
-            }
+            deliverThisRound(deliveries, remainDelCount);
 
             // 수거개수가 0 될때 까지, 첫번째 집까지
-            while (remainPickCount > 0 && pIndex >= 0) {
-                if (pickups[pIndex]
-                        > remainPickCount) { // 이집에 수거해야할 개수가 remainPickCount보다 많으면 이집에서 remainPickCount 싹 소모하면 됨
-                    pickups[pIndex] = pickups[pIndex] - remainPickCount;
-                    remainPickCount = 0;
-                } else if (pickups[pIndex] == remainPickCount) { // 인덱스 하나 -- (다음 왕복시 이집부터 조사하도록)
-                    pickups[pIndex] = pickups[pIndex] - remainPickCount;
-                    remainPickCount = 0;
-                    pIndex--;
-                } else { // 이집 수거 다하고도 수거공간(cap)이 남았으면
-                    remainPickCount -= pickups[pIndex];
-                    pickups[pIndex] = 0;
-                    pIndex--;
-                }
-            }
+            pickUpThisRound(pickups, remainPickCount);
 
         }
 
         return minDistanceSum;
     }
+
+    private void pickUpThisRound(int[] pickups, int remainPickCount) {
+        while (remainPickCount > 0 && pIndex >= 0) {
+            int actualPickupInThisHouse = Math.min(remainPickCount, pickups[pIndex]);
+
+            pickups[pIndex] -= actualPickupInThisHouse;
+            remainPickCount -= actualPickupInThisHouse;
+
+            if (pickups[pIndex] == 0) { // 이 집 수거 끝났으면 앞집으로 이동
+                pIndex--;
+            }
+        }
+    }
+
+    private void deliverThisRound(int[] deliveries, int remainDelCount) {
+        while (remainDelCount > 0 && dIndex >= 0) {
+            int actualDeliverInThisHouse = Math.min(remainDelCount, deliveries[dIndex]);
+
+            deliveries[dIndex] -= actualDeliverInThisHouse;
+            remainDelCount -= actualDeliverInThisHouse;
+
+            if (deliveries[dIndex] == 0) {
+                dIndex--;
+            }
+        }
+    }
+
 }
+
+// lagacy 코드 - deliverThisRound()
+//    private void deliverThisRound(int[] deliveries, int remainDelCount) {
+//        while (remainDelCount > 0 && dIndex >= 0) {
+//            // 이집에 배달해야할 개수가 remainDelCount보다 많으면 이집에서 remainDelCount 싹 소모하면 됨
+//            if (deliveries[dIndex] > remainDelCount) { // 그래도 남았으니 이집은 나중애 한번 더와야함. 인덱스 놔둠
+//                deliveries[dIndex] = deliveries[dIndex] - remainDelCount;
+//                remainDelCount = 0;
+//            } else if (deliveries[dIndex] == remainDelCount) { // 인덱스 하나 -- (다음 왕복시 이집부터 조사하도록)
+//                deliveries[dIndex] = deliveries[dIndex] - remainDelCount;
+//                remainDelCount = 0;
+//                dIndex--;
+//            } else { // 이집에 배달 다하고도 배달물량이 남았으면
+//                remainDelCount -= deliveries[dIndex];
+//                deliveries[dIndex] = 0;
+//                dIndex--;
+//            }
+//        }
+//    }
