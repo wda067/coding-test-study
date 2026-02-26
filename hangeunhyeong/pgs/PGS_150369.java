@@ -9,6 +9,7 @@ PGS_150369
 - 누적합을 이용하여 반환점을 기록
  */
 public class PGS_150369 {
+
     public long solution(int cap, int n, int[] deliveries, int[] pickups) {
         for(int i = n - 2; i >= 0; i--){
             deliveries[i] += deliveries[i + 1];
@@ -40,5 +41,22 @@ public class PGS_150369 {
 
         return dis;
     }
+    // gpt가 푼 것
+    public long solution2(int cap, int n, int[] deliveries, int[] pickups) {
+        long answer = 0;
+        long dRem = 0; // i..n-1 구간 배달 남은 총량
+        long pRem = 0; // i..n-1 구간 수거 남은 총량
 
+        for (int i = n - 1; i >= 0; i--) {
+            dRem += deliveries[i];
+            pRem += pickups[i];
+
+            while (dRem > 0 || pRem > 0) {
+                dRem -= cap;
+                pRem -= cap;
+                answer += (long)(i + 1) * 2;
+            }
+        }
+        return answer;
+    }
 }
